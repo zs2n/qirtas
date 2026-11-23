@@ -141,6 +141,14 @@ section h2{margin:0 0 24px;font:600 clamp(24px,5vw,30px)/1.5 var(--f)}
 
 /* contact */
 .cnote{margin:0 0 16px;color:var(--muted)}
+.clist li{display:flex;gap:8px;align-items:stretch}
+.clist li .crow{flex:1;min-width:0}
+.hascopy .carr{display:none}
+.ctx bdi{font-size:14.5px}
+.hascopy .crow{gap:12px;padding-inline:12px}
+.copybtn{flex:none;min-width:60px;padding:0 10px;background:transparent;color:var(--ink);border:1px solid var(--rule);border-radius:6px;font:600 14px/1 var(--f);cursor:pointer}
+.copybtn:hover{border-color:var(--accent);color:var(--accent)}
+.copybtn.done{border-color:var(--accent);color:var(--accent)}
 .clist{list-style:none;margin:0;padding:0;display:grid;gap:12px;max-width:560px}
 .crow{display:flex;align-items:center;gap:16px;min-height:64px;padding:12px 16px;background:var(--raised);border:1px solid var(--rule);border-radius:6px;color:var(--ink);text-decoration:none}
 .crow:hover{border-color:var(--accent)}
@@ -308,7 +316,7 @@ const UI = {
     soon: "قريبًا", steamSoon: "قريبًا على", play: "العب الآن", playAria: "العب ", mobile: "تُلعب من الجوال", mobileShort: "تُلعب من الجوال",
     contactH: "تواصل معنا", contactP: "للتعاون أو الاستفسار أو الاقتراحات.",
     joinH: "انضم لفريقنا", joinP: "تحب تشتغل معنا؟ عرّفنا بنفسك وبأعمالك وراسلنا.",
-    joinSubject: "طلب انضمام لفريق قرطاس", mail: "راسلنا بالبريد", mailLabel: "البريد الإلكتروني", join: "أرسل طلب الانضمام", ig: "إنستقرام",
+    joinSubject: "طلب انضمام لفريق قرطاس", mail: "راسلنا بالبريد", copyBtn: "نسخ", copied: "تم النسخ", mailLabel: "البريد الإلكتروني", join: "أرسل طلب الانضمام", ig: "إنستقرام",
     footNav: "الموقع", footContact: "تواصل", noNews: "لا أخبار بعد.",
     copy: "© قرطاس", top: "إلى الأعلى",
     langBtn: "EN", langAria: "Switch to English", themeAria: { dark: "التبديل إلى النمط الفاتح", light: "التبديل إلى النمط الداكن" }
@@ -321,7 +329,7 @@ const UI = {
     soon: "Coming soon", steamSoon: "Coming soon to", play: "Play now", playAria: "Play ", mobile: "Playable on mobile", mobileShort: "Playable on mobile",
     contactH: "Contact us", contactP: "For collaborations, questions or suggestions.",
     joinH: "Join our team", joinP: "Want to work with us? Tell us about yourself and your work.",
-    joinSubject: "Request to join the Qirtas team", mail: "Email us", mailLabel: "Email", join: "Send a join request", ig: "Instagram",
+    joinSubject: "Request to join the Qirtas team", mail: "Email us", copyBtn: "Copy", copied: "Copied", mailLabel: "Email", join: "Send a join request", ig: "Instagram",
     footNav: "Site", footContact: "Contact", noNews: "No news yet.",
     copy: "© Qirtas", top: "Back to top",
     langBtn: "ع", langAria: "التبديل إلى العربية", themeAria: { dark: "Switch to light mode", light: "Switch to dark mode" }
@@ -369,6 +377,20 @@ const UI = {
     try {
       return new Date(Date.UTC(+m[1], +m[2] - 1, +m[3])).toLocaleDateString(lang === "ar" ? "ar-u-nu-latn" : "en", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" });
     } catch (e) { return s; }
+  }
+  /* يفتح كتابة رسالة في Gmail مباشرة بدل تطبيق البريد الافتراضي */
+  function mailUrl(subject) {
+    return "https://mail.google.com/mail/?view=cm&fs=1&to=" + encodeURIComponent(SITE.email) + (subject ? "&su=" + encodeURIComponent(subject) : "");
+  }
+  function copyText(txt, done) {
+    function fallback() {
+      var ta = document.createElement("textarea"); ta.value = txt; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select(); var ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) {}
+      document.body.removeChild(ta); done(ok);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(function () { done(true); }, fallback);
+    else fallback();
   }
   function igUrl() { return "https://www.instagram.com/" + encodeURIComponent(String(SITE.instagram).replace(/^@/, "")) + "/"; }
 
@@ -459,7 +481,17 @@ const UI = {
       var tx = el("span", "ctx"); tx.appendChild(el("small", null, label)); tx.appendChild(el("bdi", null, value)); a.appendChild(tx);
       a.appendChild(icon("arrow", "arrow carr")); li.appendChild(a); cl.appendChild(li);
     }
-    if (SITE.email) crow("mail", t.mailLabel, SITE.email, "mailto:" + SITE.email);
+    if (SITE.email) {
+      crow("mail", t.mailLabel, SITE.email, mailUrl(), true);
+      var cp = el("button", "copybtn", t.copyBtn); cp.type = "button";
+      cp.addEventListener("click", function () {
+        copyText(SITE.email, function (ok) {
+          cp.textContent = ok ? t.copied : t.copyBtn; cp.classList.toggle("done", ok);
+          setTimeout(function () { cp.textContent = t.copyBtn; cp.classList.remove("done"); }, 2000);
+        });
+      });
+      cl.lastChild.classList.add("hascopy"); cl.lastChild.appendChild(cp);
+    }
     if (SITE.instagram) crow("ig", t.ig, "@" + String(SITE.instagram).replace(/^@/, ""), igUrl(), true);
     cb.appendChild(cl);
 
@@ -472,9 +504,9 @@ const UI = {
     });
     var fc = $("footContact"); fc.textContent = "";
     function fli(label, href, isExt) { var li = el("li"); var a = el("a", null, label); a.href = href; if (isExt) ext(a, href); li.appendChild(a); fc.appendChild(li); }
-    if (SITE.email) fli(t.mail, "mailto:" + SITE.email);
+    if (SITE.email) fli(t.mail, mailUrl(), true);
     if (SITE.instagram) fli(t.ig, igUrl(), true);
-    if (SITE.email) { var jl = el("li", "joinli"); jl.appendChild(btn("solid", t.joinH, "mailto:" + SITE.email + "?subject=" + encodeURIComponent(t.joinSubject), "mail")); fc.appendChild(jl); }
+    if (SITE.email) { var jl = el("li", "joinli"); jl.appendChild(btn("solid", t.joinH, mailUrl(t.joinSubject), "mail", true)); fc.appendChild(jl); }
     $("copyText").textContent = t.copy; $("toTop").textContent = t.top;
 
     var lb = $("langBtn"); lb.textContent = t.langBtn; lb.setAttribute("aria-label", t.langAria);
