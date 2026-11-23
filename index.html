@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>قرطاس — استوديو ألعاب</title>
-<meta name="description" content="قرطاس استوديو ألعاب. ألعابنا تُلعب من المتصفح مباشرةً وعلى الجوال، بلا تحميل.">
+<meta name="description" content="قرطاس استوديو ألعاب. هنا ألعابنا وأخبارنا وطرق التواصل معنا.">
 <link rel="canonical" href="https://zs2n.github.io/qirtas/">
 <meta name="theme-color" content="#f4ecdc">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="قرطاس">
 <meta property="og:title" content="قرطاس — استوديو ألعاب">
-<meta property="og:description" content="قرطاس استوديو ألعاب. ألعابنا تُلعب من المتصفح مباشرةً وعلى الجوال، بلا تحميل.">
+<meta property="og:description" content="قرطاس استوديو ألعاب. هنا ألعابنا وأخبارنا وطرق التواصل معنا.">
 <meta property="og:url" content="https://zs2n.github.io/qirtas/">
 <meta property="og:locale" content="ar_AR">
 <meta property="og:locale:alternate" content="en_US">
@@ -23,9 +23,9 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;600&family=Noto+Naskh+Arabic:wght@400;500&family=Reem+Kufi:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;600&display=swap" rel="stylesheet">
 <script>
-/* يضبط النمط واللغة قبل الرسم لتفادي الوميض */
+/* يضبط النمط واللغة قبل الرسم لتفادي الوميض. الافتراضي عربي دائمًا. */
 (function () {
   var d = document.documentElement, t = null, l = null;
   try { t = localStorage.getItem("qirtas-theme"); } catch (e) {}
@@ -41,9 +41,7 @@
 :root{
   --ground:#f4ecdc; --raised:#fbf6ec; --rule:#d9c9ac; --ink:#1f1a14; --muted:#6b5d4a;
   --accent:#a3341f; --accent-soft:#f5ddd2; --on-accent:#fff8ee; --gilt:#b8862b;
-  --f-display:"Reem Kufi","Noto Kufi Arabic",system-ui,sans-serif;
-  --f-ui:"Noto Kufi Arabic",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;
-  --f-text:"Noto Naskh Arabic","Traditional Arabic",serif;
+  --f:"Noto Kufi Arabic",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;
 }
 :root[data-theme="dark"]{
   --ground:#191511; --raised:#231e18; --rule:#3d342a; --ink:#f1e8d8; --muted:#b3a48d;
@@ -56,25 +54,21 @@
     --accent:#e8775c; --accent-soft:#3d1d14; --on-accent:#191511; --gilt:#d6a64a; color-scheme:dark;
   }
 }
-:root[lang="en"]{
-  --f-display:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  --f-ui:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  --f-text:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-}
+:root[lang="en"]{--f:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:16px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
-body{margin:0;background:var(--ground);color:var(--ink);font:400 16px/1.8 var(--f-ui);overflow-wrap:anywhere}
+body{margin:0;background:var(--ground);color:var(--ink);font:400 16px/1.9 var(--f);overflow-wrap:anywhere}
 img,svg{display:block;max-width:100%}
 a{color:var(--accent);text-underline-offset:.2em}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .skip{position:absolute;inset-inline-start:12px;top:-100px;background:var(--accent);color:var(--on-accent);padding:10px 16px;border-radius:3px;z-index:10;text-decoration:none}
 .skip:focus{top:12px}
-.wrap{width:100%;max-width:960px;margin-inline:auto;padding-inline:24px}
+.wrap{width:100%;max-width:1000px;margin-inline:auto;padding-inline:20px}
 
 /* header */
 header.top{border-bottom:1px solid var(--rule)}
-.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:10px}
 .brand{display:inline-flex;align-items:center;min-height:44px}
 .brand img{height:30px;width:auto}
 .logo-dark{display:none}
@@ -85,66 +79,77 @@ header.top{border-bottom:1px solid var(--rule)}
   :root:not([data-theme]) .logo-dark{display:block}
 }
 .tools{display:flex;gap:8px}
-.btn-icon{min-width:44px;min-height:44px;padding:0 12px;display:inline-flex;align-items:center;justify-content:center;background:transparent;color:var(--ink);border:1px solid var(--rule);border-radius:3px;font:600 14px/1 var(--f-ui);cursor:pointer}
+.btn-icon{min-width:44px;min-height:44px;padding:0 12px;display:inline-flex;align-items:center;justify-content:center;background:transparent;color:var(--ink);border:1px solid var(--rule);border-radius:3px;font:600 14px/1 var(--f);cursor:pointer}
 .btn-icon:hover{border-color:var(--accent);color:var(--accent)}
 .btn-icon svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8}
 .ico-sun{display:none}
 :root[data-theme="dark"] .ico-sun{display:block}
 :root[data-theme="dark"] .ico-moon{display:none}
-nav.main{display:flex;flex-wrap:wrap;gap:4px 20px;padding-bottom:8px}
-nav.main a{min-height:44px;min-width:44px;justify-content:center;display:inline-flex;align-items:center;color:var(--ink);text-decoration:none;font-weight:600;font-size:15px;border-block-end:2px solid transparent}
+nav.main{display:flex;flex-wrap:wrap;gap:0 20px;padding-bottom:6px}
+nav.main a{min-height:44px;min-width:48px;display:inline-flex;align-items:center;justify-content:center;color:var(--ink);text-decoration:none;font-weight:600;font-size:15px;border-block-end:2px solid transparent}
 nav.main a:hover{color:var(--accent);border-color:var(--accent)}
 
 /* hero */
-.hero{padding-block:56px 16px}
+.hero{padding-block:48px 28px}
 .hero-logo{margin:0}
-.hero-logo img{width:min(310px,80%);height:auto}
+.hero-logo img{width:min(300px,78%);height:auto}
 .hero .rule{width:72px;height:3px;background:var(--gilt);margin-block:24px}
-.hero p{margin:0;max-width:34em;font:400 19px/2 var(--f-text);color:var(--ink)}
-:root[lang="en"] .hero p{font-size:18px;line-height:1.7}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px}
 
-section{padding-block:40px;border-top:1px solid var(--rule)}
-section h2{margin:0 0 24px;font:600 clamp(24px,5vw,32px)/1.4 var(--f-display)}
-.sec-about p{margin:0;max-width:36em;font:400 19px/2 var(--f-text)}
-:root[lang="en"] .sec-about p{font-size:18px;line-height:1.7}
-
-/* games */
-.games{list-style:none;margin:0;padding:0;display:grid;gap:16px;grid-template-columns:1fr}
-@media (min-width:640px){.games{grid-template-columns:repeat(2,1fr)}}
-.game{background:var(--raised);border:1px solid var(--rule);border-radius:6px;overflow:hidden;display:flex;flex-direction:column}
-.gbody{padding:20px;display:flex;flex-direction:column;gap:12px;flex:1}
-.cover{aspect-ratio:16/9;background:#111;overflow:hidden}
-.cover canvas,.cover img{display:block;width:100%;height:100%;object-fit:cover}
-.cover canvas{image-rendering:pixelated}
-.game.soon{background:transparent;border-style:dashed}
-.game h3{margin:0;font:600 22px/1.4 var(--f-display);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.badge{font:600 13px/1 var(--f-ui);padding:6px 10px;border-radius:3px;background:var(--accent-soft);color:var(--accent);white-space:nowrap}
-.game.soon .badge{background:transparent;color:var(--muted);border:1px solid var(--rule)}
-.game p{margin:0;color:var(--ink);font:400 16px/1.9 var(--f-text)}
-:root[lang="en"] .game p{font-size:16px;line-height:1.6}
-.game.soon h3{color:var(--muted)}
-.credit{font-size:14px;color:var(--muted)}
-.credit a{display:inline-flex;align-items:center;min-height:44px;font-weight:600}
-.play{margin-top:auto;align-self:flex-start;min-height:44px;display:inline-flex;align-items:center;gap:8px;padding:0 20px;background:var(--accent);color:var(--on-accent);border-radius:3px;text-decoration:none;font-weight:600}
-.play:hover{filter:brightness(1.1)}
-.play svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2}
+.btn{min-height:44px;display:inline-flex;align-items:center;gap:8px;padding:0 20px;border-radius:3px;font:600 15px/1 var(--f);text-decoration:none;cursor:pointer;border:1px solid var(--accent)}
+.btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;flex:none}
+.btn.solid{background:var(--accent);color:var(--on-accent)}
+.btn.solid:hover{filter:brightness(1.1)}
+.btn.line{background:transparent;color:var(--accent)}
+.btn.line:hover{background:var(--accent);color:var(--on-accent)}
 [dir="rtl"] .arrow{transform:scaleX(-1)}
 
-/* contact / news */
-.ig{display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border:1px solid var(--accent);border-radius:3px;font-weight:600;text-decoration:none;direction:ltr}
-.ig:hover{background:var(--accent);color:var(--on-accent)}
-.soonline,.empty{margin:0;color:var(--muted);font-size:16px}
-.posts{list-style:none;margin:0;padding:0;display:grid;gap:16px}
-.post{background:var(--raised);border:1px solid var(--rule);border-radius:6px;overflow:hidden}
-.pbody{padding:20px}
-.pimg{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
-.post h3{margin:0 0 4px;font:600 20px/1.5 var(--f-display)}
-.post time{display:block;color:var(--muted);font-size:14px;margin-bottom:8px}
-.post p{margin:0;font:400 16px/1.9 var(--f-text)}
+section{padding-block:44px;border-top:1px solid var(--rule)}
+section h2{margin:0 0 24px;font:600 clamp(24px,5vw,30px)/1.5 var(--f)}
+.sec-about p{margin:0;max-width:36em;font-size:18px}
 
-footer{border-top:1px solid var(--rule);padding-block:28px;color:var(--muted);font-size:14px}
-footer .wrap{display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:space-between;align-items:center}
-footer a{min-height:44px;display:inline-flex;align-items:center}
+/* cards */
+.games,.posts{list-style:none;margin:0;padding:0;display:grid;gap:20px;grid-template-columns:1fr}
+@media (min-width:640px){.games{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--raised);border:1px solid var(--rule);border-radius:6px;overflow:hidden;display:flex;flex-direction:column}
+.cover{position:relative;aspect-ratio:16/9;background:#111}
+.cover img{width:100%;height:100%;object-fit:cover}
+.cbody{padding:20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card h3{margin:0;font:600 21px/1.5 var(--f)}
+.card p{margin:0;font-size:15.5px;line-height:1.9}
+.card time{color:var(--muted);font-size:14px}
+.credit{font-size:14px;color:var(--muted)}
+.credit a{display:inline-flex;align-items:center;min-height:44px;font-weight:600}
+.card.soon h3{color:var(--muted)}
+.play{margin-top:auto;align-self:flex-start}
+
+/* corner chips on covers */
+.chip{position:absolute;inset-block-start:10px;inset-inline-start:10px;display:inline-flex;align-items:center;justify-content:center;min-height:36px;min-width:36px;padding:0 10px;border-radius:18px;background:rgba(25,21,17,.82);color:#f1e8d8;font:600 13px/1 var(--f)}
+.phone-glow svg{width:20px;height:20px;fill:none;stroke:#ffd27a;stroke-width:1.8;filter:drop-shadow(0 0 5px rgba(255,190,80,.95)) drop-shadow(0 0 12px rgba(255,170,60,.6));animation:glow 2.6s ease-in-out infinite}
+.phone-glow svg .scr{fill:#ffd27a;fill-opacity:.9;stroke:none}
+@keyframes glow{50%{filter:drop-shadow(0 0 2px rgba(255,190,80,.6)) drop-shadow(0 0 5px rgba(255,170,60,.3))}}
+
+/* contact */
+.contact-grid{display:grid;gap:20px;grid-template-columns:1fr}
+@media (min-width:720px){.contact-grid{grid-template-columns:repeat(2,1fr)}}
+.panel{background:var(--raised);border:1px solid var(--rule);border-radius:6px;padding:24px;display:flex;flex-direction:column;gap:14px}
+.panel h3{margin:0;font:600 20px/1.5 var(--f)}
+.panel p{margin:0;color:var(--muted)}
+.panel .btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:auto}
+.panel .mail-text{direction:ltr;unicode-bidi:isolate;font-size:15px;color:var(--ink);text-align:start}
+
+/* footer */
+footer{border-top:1px solid var(--rule);padding-block:36px 28px;background:var(--raised)}
+.foot-grid{display:grid;gap:28px;grid-template-columns:1fr}
+@media (min-width:720px){.foot-grid{grid-template-columns:1.2fr 1fr 1fr}}
+footer h4{margin:0 0 6px;font:600 15px/1.6 var(--f)}
+footer ul{list-style:none;margin:0;padding:0}
+footer li a{display:inline-flex;align-items:center;min-height:44px;color:var(--ink);text-decoration:none;font-size:15px}
+footer li a:hover{color:var(--accent);text-decoration:underline}
+footer .brand img{height:34px}
+footer .small{color:var(--muted);font-size:14px;margin:6px 0 0}
+.copy{margin-top:20px;padding-top:16px;border-top:1px solid var(--rule);color:var(--muted);font-size:14px;display:flex;flex-wrap:wrap;gap:0 16px;justify-content:space-between;align-items:center}
+.copy a{display:inline-flex;align-items:center;min-height:44px}
 </style>
 </head>
 <body>
@@ -153,7 +158,7 @@ footer a{min-height:44px;display:inline-flex;align-items:center}
 <header class="top">
   <div class="wrap">
     <div class="bar">
-      <a class="brand" href="#top" id="brand">
+      <a class="brand" href="#top">
         <img class="logo-light" src="assets/qirtas-wordmark.svg" width="82" height="30" alt="قرطاس">
         <img class="logo-dark" src="assets/qirtas-wordmark-paper.svg" width="82" height="30" alt="قرطاس">
       </a>
@@ -174,6 +179,7 @@ footer a{min-height:44px;display:inline-flex;align-items:center}
     <div class="hero">
       <h1 class="hero-logo"><img class="logo-light" src="assets/qirtas-wordmark.svg" width="310" height="110" alt="قرطاس"><img class="logo-dark" src="assets/qirtas-wordmark-paper.svg" width="310" height="110" alt="قرطاس"></h1>
       <div class="rule" aria-hidden="true"></div>
+      <div class="hero-actions" id="heroActions"></div>
     </div>
   </div>
 
@@ -195,15 +201,25 @@ footer a{min-height:44px;display:inline-flex;align-items:center}
 
     <section id="contact" aria-labelledby="h-contact">
       <h2 id="h-contact"></h2>
-      <div id="contactBody"></div>
+      <div class="contact-grid" id="contactBody"></div>
     </section>
   </div>
 </main>
 
 <footer>
   <div class="wrap">
-    <span id="footText"></span>
-    <a href="#top" id="toTop"></a>
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="#top">
+          <img class="logo-light" src="assets/qirtas-wordmark.svg" width="93" height="33" alt="قرطاس">
+          <img class="logo-dark" src="assets/qirtas-wordmark-paper.svg" width="93" height="33" alt="قرطاس">
+        </a>
+        <p class="small" id="footAbout"></p>
+      </div>
+      <div><h4 id="footNavH"></h4><ul id="footNav"></ul></div>
+      <div><h4 id="footContactH"></h4><ul id="footContact"></ul></div>
+    </div>
+    <div class="copy"><span id="copyText"></span><a href="#top" id="toTop"></a></div>
   </div>
 </footer>
 
@@ -211,37 +227,42 @@ footer a{min-height:44px;display:inline-flex;align-items:center}
 /* ============================================================
    كل محتوى الموقع هنا. لا تلمس التصميم.
 
-   • إضافة لعبة: أضف سطرًا جديدًا في مصفوفة games:
-       { id:"x", status:"live", name:{ar:"..",en:".."}, line:{ar:"..",en:".."}, url:"https://..." }
-     الحالة "live" لعبة متاحة (تحتاج url)، و"soon" قريبًا (بلا رابط).
+   • إضافة لعبة: أضف سطرًا في مصفوفة games:
+       { id:"x", status:"live", name:{ar:"..",en:".."}, line:{ar:"..",en:".."}, url:"https://...", image:"assets/x.webp" }
+     "live" لعبة متاحة (تحتاج url)، و"soon" قريبًا (بلا رابط).
+     image نص واحد، أو { ar:"..", en:".." } لو الصورة تختلف حسب اللغة.
      credit اختياري: { ar:"نص قبل", en:"text before", name:{ar:"..",en:".."}, url:"https://.." }
-   • إضافة خبر: أضف سطرًا في مصفوفة posts:
-       { date:"2026-11-23", title:{ar:"..",en:".."}, text:{ar:"..",en:".."} }
-   • حساب إنستقرام: ضع المعرّف في instagram (مثل "qirtas.studio") فيظهر الزر. اتركه null ليظهر «قريبًا».
+   • إضافة خبر: أضف سطرًا في posts:
+       { date:"2026-11-23", title:{ar:"..",en:".."}, text:{ar:"..",en:".."}, image:"assets/x.webp" (اختياري) }
+   • إنستقرام والبريد: instagram (المعرّف فقط) و email. ضع null ليختفي الزر.
    ============================================================ */
 const SITE = {
   studioUrl: "https://zs2n.github.io/qirtas/",
   instagram: "studio.qirtas",
+  email: "studio.qirtas@gmail.com",
   about: {
-    ar: "قرطاس استوديو ألعاب. ألعابنا تُلعب من المتصفح مباشرةً وعلى الجوال. لا تحميل: افتح الرابط والعب.",
-    en: "Qirtas is a game studio. Our games play right in the browser, on your phone too. No download: open the link and play."
+    ar: "قرطاس استوديو ألعاب. هنا ألعابنا وأخبارنا وطرق التواصل معنا.",
+    en: "Qirtas is a game studio. Find our games, our news, and ways to reach us here."
   },
   games: [
     { id: "alkhatm", status: "live", name: { ar: "الختم", en: "Al-Khatm" },
-      line: { ar: "لعبة فحص مستندات بالبكسل آرت بمناسبة اليوم العالمي لمكافحة الفساد، تُلعب من الجوال.",
-              en: "A pixel-art document-inspection game for International Anti-Corruption Day, made for phones." },
-      url: "https://zs2n.github.io/alkhatm/",
+      line: { ar: "أنت موظف جديد في إدارة المشتريات. افحص كل معاملة وطابقها مع اللائحة، وارفض الرشوة، واختم بالقرار الصحيح. صُنعت بمناسبة اليوم العالمي لمكافحة الفساد.",
+              en: "You're a new employee in the procurement department. Check every transaction against the regulations, refuse bribes, and stamp the right decision. Made for International Anti-Corruption Day." },
+      url: "https://zs2n.github.io/alkhatm/", image: "assets/game-alkhatm.webp",
       credit: { ar: "بالتعاون مع", en: "In collaboration with",
                 name: { ar: "نادي نزاهة", en: "Nazaha Club" }, url: "https://www.instagram.com/nazaha_iau/" } },
     { id: "akhwiya", status: "live", name: { ar: "تقاضي الأخوياء", en: "Taqadi Al-Akhwiya" },
-      line: { ar: "لعبة جماعية يحكم فيها قاضٍ بالذكاء الاصطناعي.", en: "A group game judged by an AI judge." },
-      url: "https://claude.ai/artifact/5x3fGN1Cfp3nwYwLFTaiw9" },
+      line: { ar: "لعبة مزح بين الأخوياء. حدّدوا موضوع الخلاف، وكل طرف يدافع عن نفسه، وقاضٍ بالذكاء الاصطناعي يحكم بينكم.",
+              en: "A playful game of disputes between friends. Set the quarrel, let each side defend itself, and an AI judge rules between you." },
+      url: "https://claude.ai/artifact/5x3fGN1Cfp3nwYwLFTaiw9", image: "assets/game-taqadi.webp" },
     { id: "arwand", status: "live", name: { ar: "عرش أرْوَند", en: "Throne of Arwand" },
-      line: { ar: "لعبة إدارة مملكة.", en: "A kingdom-management game." },
-      url: "https://zs2n.github.io/arvand/" },
+      line: { ar: "أنت الملك. استقبل رعاياك، وأدِر الذهب والطعام والجنود، وكل قرار تتخذه يغيّر المملكة.",
+              en: "You are the king. Hear your subjects, manage gold, food and soldiers. Every decision changes the kingdom." },
+      url: "https://zs2n.github.io/arvand/", image: "assets/game-arwand.webp" },
     { id: "port1960", status: "live", name: { ar: "ميناء 1960", en: "Port 1960" },
-      line: { ar: "لعبة بيكسل آرت بقصة.", en: "A pixel-art game with a story." },
-      url: "https://claude.ai/artifact/VNYhJf9JnKJ8cVL9sGYL9Y" },
+      line: { ar: "صيف 1960، وعادت كل المراكب إلا مركبًا واحدًا. مغامرة بالبكسل آرت بقصة، تجمع فيها الأدلة في دفترك.",
+              en: "Summer 1960, and every ship came back except one. A pixel-art story adventure where you collect clues in your notebook." },
+      url: "https://claude.ai/artifact/VNYhJf9JnKJ8cVL9sGYL9Y", image: "assets/game-port1960.webp" },
     { id: "sevenfloors", status: "soon", name: { ar: "سبعة طوابق", en: "Seven Floors" },
       line: { ar: "لعبة رعب.", en: "A horror game." }, url: null,
       image: { ar: "assets/sevenfloors-menu-ar.webp", en: "assets/sevenfloors-menu-en.webp" } }
@@ -260,25 +281,29 @@ const SITE = {
 
 const UI = {
   ar: {
-    title: "قرطاس — استوديو ألعاب",
-    desc: SITE.about.ar,
-    skip: "تخطّي إلى المحتوى", home: "قرطاس",
+    title: "قرطاس — استوديو ألعاب", skip: "تخطّي إلى المحتوى", home: "قرطاس",
     nav: { about: "من نحن", news: "الأخبار", games: "الألعاب", contact: "تواصل" },
-    h: { about: "من نحن", games: "معرض الألعاب", contact: "تواصل وحسابات", news: "الأخبار" },
-    live: "متاحة", soon: "قريبًا", play: "العب الآن", playAria: "العب ",
-    ig: "إنستقرام", igSoon: "حساباتنا قريبًا.", noNews: "لا أخبار بعد.",
-    foot: "قرطاس — استوديو ألعاب", top: "إلى الأعلى",
+    h: { about: "من نحن", news: "الأخبار", games: "الألعاب", contact: "تواصل وانضمام" },
+    heroGames: "الألعاب", heroContact: "تواصل معنا",
+    soon: "قريبًا", play: "العب الآن", playAria: "العب ", mobile: "تُلعب من الجوال",
+    contactH: "تواصل معنا", contactP: "للتعاون أو الاستفسار أو الاقتراحات، راسلنا.",
+    joinH: "انضم لفريقنا", joinP: "تحب تشتغل معنا؟ عرّفنا بنفسك وبأعمالك وراسلنا.",
+    joinSubject: "طلب انضمام لفريق قرطاس", mail: "راسلنا بالبريد", join: "أرسل طلب الانضمام", ig: "إنستقرام",
+    footNav: "الموقع", footContact: "تواصل", noNews: "لا أخبار بعد.",
+    copy: "© قرطاس", top: "إلى الأعلى",
     langBtn: "EN", langAria: "Switch to English", themeAria: { dark: "التبديل إلى النمط الفاتح", light: "التبديل إلى النمط الداكن" }
   },
   en: {
-    title: "Qirtas — Game studio",
-    desc: SITE.about.en,
-    skip: "Skip to content", home: "Qirtas",
+    title: "Qirtas — Game studio", skip: "Skip to content", home: "Qirtas",
     nav: { about: "About", news: "News", games: "Games", contact: "Contact" },
-    h: { about: "About", games: "Games", contact: "Contact & accounts", news: "News" },
-    live: "Available", soon: "Coming soon", play: "Play now", playAria: "Play ",
-    ig: "Instagram", igSoon: "Our accounts are coming soon.", noNews: "No news yet.",
-    foot: "Qirtas — Game studio", top: "Back to top",
+    h: { about: "About", news: "News", games: "Games", contact: "Contact & join us" },
+    heroGames: "Games", heroContact: "Contact us",
+    soon: "Coming soon", play: "Play now", playAria: "Play ", mobile: "Playable on mobile",
+    contactH: "Contact us", contactP: "For collaborations, questions or suggestions, write to us.",
+    joinH: "Join our team", joinP: "Want to work with us? Tell us about yourself and your work.",
+    joinSubject: "Request to join the Qirtas team", mail: "Email us", join: "Send a join request", ig: "Instagram",
+    footNav: "Site", footContact: "Contact", noNews: "No news yet.",
+    copy: "© Qirtas", top: "Back to top",
     langBtn: "ع", langAria: "التبديل إلى العربية", themeAria: { dark: "Switch to light mode", light: "Switch to dark mode" }
   }
 };
@@ -287,6 +312,7 @@ const UI = {
   var root = document.documentElement;
   var $ = function (id) { return document.getElementById(id); };
   var lang = root.lang === "en" ? "en" : "ar";
+  var NS = "http://www.w3.org/2000/svg";
 
   function el(tag, cls, text) {
     var e = document.createElement(tag);
@@ -294,64 +320,44 @@ const UI = {
     if (text != null) e.textContent = text;
     return e;
   }
-  /* اسم بالإنجليزية داخل نص عربي: bdi يحميه من كسر الجملة */
-  function nameNode(n) {
-    var b = document.createElement("bdi");
-    b.textContent = n[lang];
-    return b;
-  }
+  function nameNode(n) { var b = document.createElement("bdi"); b.textContent = n[lang]; return b; }
   function ext(a, href) { a.href = href; a.target = "_blank"; a.rel = "noopener noreferrer"; return a; }
-  function arrow() {
-    var s = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    s.setAttribute("viewBox", "0 0 24 24"); s.setAttribute("class", "arrow"); s.setAttribute("aria-hidden", "true");
-    var p = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    p.setAttribute("d", "M5 12h14M13 6l6 6-6 6"); s.appendChild(p); return s;
+  function pick(v) { return typeof v === "string" ? v : v[lang]; }
+  var ICONS = {
+    arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+    mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
+    ig: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/>',
+    phone: '<rect x="7" y="2.5" width="10" height="19" rx="2.2"/><rect class="scr" x="8.8" y="5" width="6.4" height="12.6" rx="0.8"/><path d="M10.5 19.6h3"/>'
+  };
+  /* أيقونات ثابتة من الكود نفسه (ليست نصًا خارجيًا) */
+  function icon(name, cls) {
+    var s = document.createElementNS(NS, "svg");
+    s.setAttribute("viewBox", "0 0 24 24"); s.setAttribute("aria-hidden", "true");
+    if (cls) s.setAttribute("class", cls);
+    s.innerHTML = ICONS[name]; return s;
   }
-  /* أغلفة بكسل آرت مرسومة بالكود (من موقع قرطاس القديم) */
-  function drawCover(cv, id) {
-    var w = 240, h = 135; cv.width = w; cv.height = h;
-    var c = cv.getContext("2d"); c.imageSmoothingEnabled = false;
-    var r = function (x, y, ww, hh, col) { c.fillStyle = col; c.fillRect(Math.round(x), Math.round(y), Math.round(ww), Math.round(hh)); };
-    var seed = 7; function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
-    if (id === "alkhatm") {
-      r(0, 0, w, h, "#2a2019");
-      for (var d = 0; d < 5; d++) { var dx = w * .12 + d * w * .17, dy = h * .2 + (d % 2) * h * .08, a = (d - 2) * .06; c.save(); c.translate(dx + 30, dy + 40); c.rotate(a);
-        r(-30, -40, 60, 80, d === 2 ? "#f4ecdc" : "#e6d9bf"); for (var l = 0; l < 7; l++) r(-22, -30 + l * 9, l === 6 ? 24 : 44, 2, "#b9a988");
-        if (d === 2) { c.strokeStyle = "#a3341f"; c.lineWidth = 3; c.beginPath(); c.arc(8, 22, 14, 0, 7); c.stroke(); r(-4, 19, 24, 5, "#a3341f"); }
-        c.restore(); }
-      r(w * .72, h * .55, 30, 14, "#5a3a24"); r(w * .72 + 10, h * .4, 10, 16, "#6e4b2a"); r(w * .72 + 4, h * .55 + 14, 22, 4, "#a3341f");
-    } else if (id === "akhwiya") {
-      r(0, 0, w, h, "#3b2a1d"); for (var p = 0; p < w; p += 24) r(p, 0, 2, h * .62, "#4a3524");
-      r(0, h * .62, w, h * .38, "#2a1d14"); r(w * .25, h * .5, w * .5, h * .16, "#6b4a30"); r(w * .25, h * .5, w * .5, 3, "#8a6440");
-      var jx = w * .5; r(jx - 14, h * .2, 28, 36, "#1b1410"); r(jx - 16, h * .28, 6, 28, "#c9a76a"); r(jx + 10, h * .28, 6, 28, "#c9a76a");
-      r(jx - 7, h * .16, 14, 14, "#8b5a3a"); r(jx - 10, h * .12, 20, 6, "#f4f4f0"); r(jx - 10, h * .12, 20, 2, "#c0392b");
-      r(jx - 11, h * .18, 3, 16, "#f4f4f0"); r(jx + 8, h * .18, 3, 16, "#f4f4f0");
-      r(w * .62, h * .42, 22, 6, "#5a3a24"); r(w * .62 + 8, h * .42 + 6, 6, 10, "#5a3a24");
-      for (var g = 0; g < 4; g++) { var gx = w * (.08 + g * .26); if (g === 1) gx -= w * .05; if (g === 2) gx += w * .05; r(gx, h * .72, 10, 14, ["#d8ccb2", "#5b7f93", "#d8ccb2", "#7a9a3c"][g]); r(gx + 2, h * .68, 6, 5, "#8b5a3a"); }
-    } else if (id === "arwand") {
-      for (var y2 = 0; y2 < h; y2++) r(0, y2, w, 1, "rgb(" + Math.round(28 + y2 / h * 20) + "," + Math.round(20 + y2 / h * 10) + "," + Math.round(30 + y2 / h * 6) + ")");
-      for (var co = 0; co < 4; co++) { var cx = w * (.1 + co * .27); r(cx, h * .1, 14, h * .75, "#3a2d36"); r(cx - 3, h * .1, 20, 6, "#4a3a44"); }
-      r(w * .38, h * .75, w * .24, h * .25, "#5a1f1f"); r(w * .44, h * .3, w * .12, h * .45, "#6b4a20"); r(w * .42, h * .26, w * .16, 8, "#b8862b"); r(w * .47, h * .4, w * .06, h * .2, "#8a2a2a");
-      [w * .18, w * .82].forEach(function (tx) { var gr = c.createRadialGradient(tx, h * .35, 1, tx, h * .35, 60); gr.addColorStop(0, "rgba(255,170,80,.55)"); gr.addColorStop(1, "rgba(255,170,80,0)"); c.fillStyle = gr; c.fillRect(tx - 60, h * .35 - 60, 120, 120); r(tx - 2, h * .35, 4, 16, "#3a2a1a"); r(tx - 3, h * .31, 6, 6, "#ffb347"); });
-    } else if (id === "port1960") {
-      for (var y3 = 0; y3 < h * .6; y3++) { var kk = y3 / (h * .6); r(0, y3, w, 1, "rgb(" + Math.round(60 + 180 * kk) + "," + Math.round(40 + 110 * kk) + "," + Math.round(80 + 20 * kk) + ")"); }
-      r(0, h * .6, w, h * .4, "#2b2a44"); var sg = c.createRadialGradient(w * .7, h * .6, 2, w * .7, h * .6, 80); sg.addColorStop(0, "rgba(255,200,120,.9)"); sg.addColorStop(1, "rgba(255,200,120,0)"); c.fillStyle = sg; c.fillRect(0, 0, w, h);
-      for (var rr = 0; rr < 26; rr++) r(w * .7 + (rnd() - .5) * (10 + rr * 2), h * .6 + rr * 2, 4, 1, "rgba(255,210,140,.5)");
-      r(0, h * .52, w * .45, h * .08, "#3a2a2a"); for (var hs = 0; hs < 5; hs++) r(hs * w * .09, h * .44 - (hs % 2) * 6, w * .07, h * .08 + (hs % 2) * 6, "#4a3434");
-      for (var pl = 0; pl < 5; pl++) r(w * .05 + pl * w * .1, h * .6, 3, h * .14, "#3a2a1a"); r(0, h * .6, w * .5, 3, "#5a4030");
-      r(w * .3, h * .72, 4, 10, "#1a1420"); r(w * .62, h * .56, w * .2, 6, "#1d1626"); r(w * .71, h * .36, 2, h * .2, "#1d1626");
-    }
+  function btn(kind, label, href, ic, isExt) {
+    var a = el("a", "btn " + kind);
+    a.href = href; if (isExt) ext(a, href);
+    if (ic) a.appendChild(icon(ic, ic === "arrow" ? "arrow" : null));
+    a.appendChild(el("span", null, label)); return a;
   }
-
   function setMeta(sel, attr, val) { var m = document.querySelector(sel); if (m) m.setAttribute(attr, val); }
+  function fmtDate(s) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s); if (!m) return s;
+    try {
+      return new Date(Date.UTC(+m[1], +m[2] - 1, +m[3])).toLocaleDateString(lang === "ar" ? "ar-u-nu-latn" : "en", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" });
+    } catch (e) { return s; }
+  }
+  function igUrl() { return "https://www.instagram.com/" + encodeURIComponent(String(SITE.instagram).replace(/^@/, "")) + "/"; }
 
   function render() {
     var t = UI[lang];
     root.lang = lang; root.dir = lang === "ar" ? "rtl" : "ltr";
     document.title = t.title;
-    setMeta('meta[name="description"]', "content", t.desc);
+    setMeta('meta[name="description"]', "content", SITE.about[lang]);
     setMeta('meta[property="og:title"]', "content", t.title);
-    setMeta('meta[property="og:description"]', "content", t.desc);
+    setMeta('meta[property="og:description"]', "content", SITE.about[lang]);
     setMeta('meta[property="og:locale"]', "content", lang === "ar" ? "ar_AR" : "en_US");
     setMeta('meta[property="og:locale:alternate"]', "content", lang === "ar" ? "en_US" : "ar_AR");
     setMeta('meta[property="og:image:alt"]', "content", t.home);
@@ -364,73 +370,90 @@ const UI = {
     ["about", "news", "games", "contact"].forEach(function (k) {
       var a = el("a", null, t.nav[k]); a.href = "#" + k; nav.appendChild(a);
     });
+
+    var ha = $("heroActions"); ha.textContent = "";
+    ha.appendChild(btn("solid", t.heroGames, "#games", "arrow"));
+    ha.appendChild(btn("line", t.heroContact, "#contact"));
+
     $("h-about").textContent = t.h.about; $("aboutText").textContent = SITE.about[lang];
-    $("h-games").textContent = t.h.games; $("h-contact").textContent = t.h.contact; $("h-news").textContent = t.h.news;
+    $("h-news").textContent = t.h.news; $("h-games").textContent = t.h.games; $("h-contact").textContent = t.h.contact;
+
+    /* الأخبار */
+    var nb = $("newsBody"); nb.textContent = "";
+    var pl = el("ul", "posts");
+    SITE.posts.slice().sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : 0; }).forEach(function (p) {
+      var li = el("li", "card");
+      if (p.image) {
+        var c = el("div", "cover"); var pi = el("img"); pi.src = pick(p.image); pi.alt = (p.alt || p.title)[lang];
+        pi.width = 1200; pi.height = 675; pi.loading = "lazy"; c.appendChild(pi); li.appendChild(c);
+      }
+      var b = el("div", "cbody"); b.appendChild(el("h3", null, p.title[lang]));
+      var tm = el("time", null, fmtDate(p.date)); tm.dateTime = p.date; b.appendChild(tm);
+      b.appendChild(el("p", null, p.text[lang])); li.appendChild(b); pl.appendChild(li);
+    });
+    if (SITE.posts.length) nb.appendChild(pl); else nb.appendChild(el("p", null, t.noNews));
 
     /* الألعاب */
     var ul = $("gamesList"); ul.textContent = "";
     SITE.games.forEach(function (g) {
       var live = g.status === "live" && g.url;
-      var li = el("li", "game" + (live ? "" : " soon"));
-      var cov = el("div", "cover");
+      var li = el("li", "card" + (live ? "" : " soon"));
       if (g.image) {
-        var im = el("img"); im.src = g.image[lang]; im.alt = g.name[lang]; im.width = 1200; im.height = 675; im.loading = "lazy"; cov.appendChild(im);
-      } else {
-        var cv = el("canvas"); cv.setAttribute("aria-hidden", "true"); cov.appendChild(cv); drawCover(cv, g.id);
+        var cov = el("div", "cover"); var im = el("img"); im.src = pick(g.image); im.alt = g.name[lang];
+        im.width = 1200; im.height = 675; im.loading = "lazy"; cov.appendChild(im);
+        var chip;
+        if (live) { chip = el("span", "chip phone-glow"); chip.setAttribute("role", "img"); chip.setAttribute("aria-label", t.mobile); chip.title = t.mobile; chip.appendChild(icon("phone")); }
+        else { chip = el("span", "chip", t.soon); }
+        cov.appendChild(chip); li.appendChild(cov);
       }
-      li.appendChild(cov);
-      var inner = el("div", "gbody");
-      var h = el("h3"); var nm = el("span"); nm.appendChild(nameNode(g.name)); h.appendChild(nm);
-      h.appendChild(el("span", "badge", live ? t.live : t.soon)); inner.appendChild(h);
+      var inner = el("div", "cbody");
+      var h = el("h3"); h.appendChild(nameNode(g.name)); inner.appendChild(h);
       if (g.line) inner.appendChild(el("p", null, g.line[lang]));
       if (live && g.credit) {
-        var c = el("p", "credit"); c.appendChild(document.createTextNode(g.credit[lang] + " "));
-        c.appendChild(ext(el("a", null, g.credit.name[lang]), g.credit.url)); inner.appendChild(c);
+        var cr = el("p", "credit"); cr.appendChild(document.createTextNode(g.credit[lang] + " "));
+        cr.appendChild(ext(el("a", null, g.credit.name[lang]), g.credit.url)); inner.appendChild(cr);
       }
       if (live) {
-        var a = ext(el("a", "play"), g.url);
-        a.appendChild(el("span", null, t.play)); a.appendChild(arrow());
-        a.setAttribute("aria-label", t.playAria + g.name[lang]);
-        inner.appendChild(a);
+        var a = btn("solid play", t.play, g.url, "arrow", true);
+        a.setAttribute("aria-label", t.playAria + g.name[lang]); inner.appendChild(a);
       }
-      li.appendChild(inner);
-      ul.appendChild(li);
+      li.appendChild(inner); ul.appendChild(li);
     });
 
-    /* التواصل */
+    /* التواصل والانضمام */
     var cb = $("contactBody"); cb.textContent = "";
-    if (SITE.instagram) {
-      var id = String(SITE.instagram).replace(/^@/, "");
-      var ig = ext(el("a", "ig", "Instagram · @" + id), "https://www.instagram.com/" + encodeURIComponent(id) + "/");
-      cb.appendChild(ig);
-    } else cb.appendChild(el("p", "soonline", t.igSoon));
-
-    /* الأخبار */
-    var nb = $("newsBody"); nb.textContent = "";
-    if (!SITE.posts.length) nb.appendChild(el("p", "empty", t.noNews));
-    else {
-      var pl = el("ul", "posts");
-      SITE.posts.slice().sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : 0; }).forEach(function (p) {
-        var li = el("li", "post");
-        if (p.image) { var pi = el("img", "pimg"); pi.src = p.image[lang]; pi.alt = (p.alt || p.title)[lang]; pi.width = 1200; pi.height = 675; pi.loading = "lazy"; li.appendChild(pi); }
-        var pb = el("div", "pbody"); li.appendChild(pb); pb.appendChild(el("h3", null, p.title[lang]));
-        var tm = el("time", null, fmtDate(p.date)); tm.dateTime = p.date; pb.appendChild(tm);
-        pb.appendChild(el("p", null, p.text[lang])); pl.appendChild(li);
-      });
-      nb.appendChild(pl);
+    var p1 = el("div", "panel"); p1.appendChild(el("h3", null, t.contactH)); p1.appendChild(el("p", null, t.contactP));
+    if (SITE.email) p1.appendChild(el("p", "mail-text", SITE.email));
+    var b1 = el("div", "btns");
+    if (SITE.email) b1.appendChild(btn("solid", t.mail, "mailto:" + SITE.email, "mail"));
+    if (SITE.instagram) b1.appendChild(btn("line", t.ig, igUrl(), "ig", true));
+    p1.appendChild(b1); cb.appendChild(p1);
+    if (SITE.email) {
+      var p2 = el("div", "panel"); p2.appendChild(el("h3", null, t.joinH)); p2.appendChild(el("p", null, t.joinP));
+      var b2 = el("div", "btns");
+      b2.appendChild(btn("solid", t.join, "mailto:" + SITE.email + "?subject=" + encodeURIComponent(t.joinSubject), "mail"));
+      p2.appendChild(b2); cb.appendChild(p2);
     }
 
-    $("footText").textContent = t.foot; $("toTop").textContent = t.top;
+    /* الفوتر */
+    $("footAbout").textContent = SITE.about[lang];
+    $("footNavH").textContent = t.footNav; $("footContactH").textContent = t.footContact;
+    var fn = $("footNav"); fn.textContent = "";
+    ["about", "news", "games", "contact"].forEach(function (k) {
+      var li = el("li"); var a = el("a", null, t.nav[k]); a.href = "#" + k; li.appendChild(a); fn.appendChild(li);
+    });
+    var fc = $("footContact"); fc.textContent = "";
+    function fli(label, href, isExt) { var li = el("li"); var a = el("a", null, label); a.href = href; if (isExt) ext(a, href); li.appendChild(a); fc.appendChild(li); }
+    if (SITE.email) {
+      fli(t.mail, "mailto:" + SITE.email);
+      fli(t.joinH, "mailto:" + SITE.email + "?subject=" + encodeURIComponent(t.joinSubject));
+    }
+    if (SITE.instagram) fli(t.ig, igUrl(), true);
+    $("copyText").textContent = t.copy; $("toTop").textContent = t.top;
+
     var lb = $("langBtn"); lb.textContent = t.langBtn; lb.setAttribute("aria-label", t.langAria);
     lb.lang = lang === "ar" ? "en" : "ar";
     syncTheme();
-  }
-
-  function fmtDate(s) {
-    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s); if (!m) return s;
-    try {
-      return new Date(Date.UTC(+m[1], +m[2] - 1, +m[3])).toLocaleDateString(lang === "ar" ? "ar-u-nu-latn" : "en", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" });
-    } catch (e) { return s; }
   }
 
   function syncTheme() {
