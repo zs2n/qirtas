@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>قرطاس — استوديو ألعاب عربي</title>
-<meta name="description" content="قرطاس استوديو عربي يصنع ألعابًا تُلعب من المتصفح مباشرةً وعلى الجوال، بلا تحميل.">
+<title>قرطاس — استوديو ألعاب</title>
+<meta name="description" content="قرطاس استوديو ألعاب. ألعابنا تُلعب من المتصفح مباشرةً وعلى الجوال، بلا تحميل.">
 <link rel="canonical" href="https://zs2n.github.io/qirtas/">
 <meta name="theme-color" content="#f4ecdc">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="قرطاس">
-<meta property="og:title" content="قرطاس — استوديو ألعاب عربي">
-<meta property="og:description" content="قرطاس استوديو عربي يصنع ألعابًا تُلعب من المتصفح مباشرةً وعلى الجوال، بلا تحميل.">
+<meta property="og:title" content="قرطاس — استوديو ألعاب">
+<meta property="og:description" content="قرطاس استوديو ألعاب. ألعابنا تُلعب من المتصفح مباشرةً وعلى الجوال، بلا تحميل.">
 <meta property="og:url" content="https://zs2n.github.io/qirtas/">
 <meta property="og:locale" content="ar_AR">
 <meta property="og:locale:alternate" content="en_US">
@@ -33,7 +33,7 @@
   d.setAttribute("data-theme", t);
   try { l = new URLSearchParams(location.search).get("lang"); } catch (e) {}
   if (l !== "ar" && l !== "en") { try { l = localStorage.getItem("qirtas-lang"); } catch (e) {} }
-  if (l !== "ar" && l !== "en") l = /^ar/i.test(navigator.language || "") || !navigator.language ? "ar" : (/^en/i.test(navigator.language) ? "en" : "ar");
+  if (l !== "ar" && l !== "en") l = "ar";
   d.lang = l; d.dir = l === "ar" ? "rtl" : "ltr";
 })();
 </script>
@@ -111,7 +111,11 @@ section h2{margin:0 0 24px;font:600 clamp(24px,5vw,32px)/1.4 var(--f-display)}
 /* games */
 .games{list-style:none;margin:0;padding:0;display:grid;gap:16px;grid-template-columns:1fr}
 @media (min-width:640px){.games{grid-template-columns:repeat(2,1fr)}}
-.game{background:var(--raised);border:1px solid var(--rule);border-radius:6px;padding:20px;display:flex;flex-direction:column;gap:12px}
+.game{background:var(--raised);border:1px solid var(--rule);border-radius:6px;overflow:hidden;display:flex;flex-direction:column}
+.gbody{padding:20px;display:flex;flex-direction:column;gap:12px;flex:1}
+.cover{aspect-ratio:16/9;background:#111;overflow:hidden}
+.cover canvas,.cover img{display:block;width:100%;height:100%;object-fit:cover}
+.cover canvas{image-rendering:pixelated}
 .game.soon{background:transparent;border-style:dashed}
 .game h3{margin:0;font:600 22px/1.4 var(--f-display);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .badge{font:600 13px/1 var(--f-ui);padding:6px 10px;border-radius:3px;background:var(--accent-soft);color:var(--accent);white-space:nowrap}
@@ -131,7 +135,9 @@ section h2{margin:0 0 24px;font:600 clamp(24px,5vw,32px)/1.4 var(--f-display)}
 .ig:hover{background:var(--accent);color:var(--on-accent)}
 .soonline,.empty{margin:0;color:var(--muted);font-size:16px}
 .posts{list-style:none;margin:0;padding:0;display:grid;gap:16px}
-.post{background:var(--raised);border:1px solid var(--rule);border-radius:6px;padding:20px}
+.post{background:var(--raised);border:1px solid var(--rule);border-radius:6px;overflow:hidden}
+.pbody{padding:20px}
+.pimg{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
 .post h3{margin:0 0 4px;font:600 20px/1.5 var(--f-display)}
 .post time{display:block;color:var(--muted);font-size:14px;margin-bottom:8px}
 .post p{margin:0;font:400 16px/1.9 var(--f-text)}
@@ -177,6 +183,11 @@ footer a{min-height:44px;display:inline-flex;align-items:center}
       <p id="aboutText"></p>
     </section>
 
+    <section id="news" aria-labelledby="h-news">
+      <h2 id="h-news"></h2>
+      <div id="newsBody"></div>
+    </section>
+
     <section id="games" aria-labelledby="h-games">
       <h2 id="h-games"></h2>
       <ul class="games" id="gamesList"></ul>
@@ -185,11 +196,6 @@ footer a{min-height:44px;display:inline-flex;align-items:center}
     <section id="contact" aria-labelledby="h-contact">
       <h2 id="h-contact"></h2>
       <div id="contactBody"></div>
-    </section>
-
-    <section id="news" aria-labelledby="h-news">
-      <h2 id="h-news"></h2>
-      <div id="newsBody"></div>
     </section>
   </div>
 </main>
@@ -215,10 +221,10 @@ footer a{min-height:44px;display:inline-flex;align-items:center}
    ============================================================ */
 const SITE = {
   studioUrl: "https://zs2n.github.io/qirtas/",
-  instagram: null,
+  instagram: "studio.qirtas",
   about: {
-    ar: "قرطاس استوديو عربي يصنع ألعابًا تُلعب من المتصفح مباشرةً وعلى الجوال. لا تحميل: افتح الرابط والعب.",
-    en: "Qirtas is an Arabic game studio. We make games you play right in the browser, on your phone too. No download: open the link and play."
+    ar: "قرطاس استوديو ألعاب. ألعابنا تُلعب من المتصفح مباشرةً وعلى الجوال. لا تحميل: افتح الرابط والعب.",
+    en: "Qirtas is a game studio. Our games play right in the browser, on your phone too. No download: open the link and play."
   },
   games: [
     { id: "alkhatm", status: "live", name: { ar: "الختم", en: "Al-Khatm" },
@@ -227,39 +233,52 @@ const SITE = {
       url: "https://zs2n.github.io/alkhatm/",
       credit: { ar: "بالتعاون مع", en: "In collaboration with",
                 name: { ar: "نادي نزاهة", en: "Nazaha Club" }, url: "https://www.instagram.com/nazaha_iau/" } },
-    { id: "akhwiya", status: "soon", name: { ar: "تقاضي الأخوياء", en: "Taqadi Al-Akhwiya" },
-      line: { ar: "لعبة جماعية يحكم فيها قاضٍ بالذكاء الاصطناعي.", en: "A group game judged by an AI judge." }, url: null },
-    { id: "arwand", status: "soon", name: { ar: "عرش أرْوَند", en: "Throne of Arwand" },
-      line: { ar: "لعبة إدارة مملكة.", en: "A kingdom-management game." }, url: null },
-    { id: "port1960", status: "soon", name: { ar: "ميناء 1960", en: "Port 1960" },
-      line: { ar: "لعبة بيكسل آرت بقصة.", en: "A pixel-art game with a story." }, url: null },
-    { id: "sevenfloors", status: "soon", name: { ar: "Seven Floors", en: "Seven Floors" },
-      line: { ar: "لعبة رعب.", en: "A horror game." }, url: null }
+    { id: "akhwiya", status: "live", name: { ar: "تقاضي الأخوياء", en: "Taqadi Al-Akhwiya" },
+      line: { ar: "لعبة جماعية يحكم فيها قاضٍ بالذكاء الاصطناعي.", en: "A group game judged by an AI judge." },
+      url: "https://claude.ai/artifact/5x3fGN1Cfp3nwYwLFTaiw9" },
+    { id: "arwand", status: "live", name: { ar: "عرش أرْوَند", en: "Throne of Arwand" },
+      line: { ar: "لعبة إدارة مملكة.", en: "A kingdom-management game." },
+      url: "https://zs2n.github.io/arvand/" },
+    { id: "port1960", status: "live", name: { ar: "ميناء 1960", en: "Port 1960" },
+      line: { ar: "لعبة بيكسل آرت بقصة.", en: "A pixel-art game with a story." },
+      url: "https://claude.ai/artifact/VNYhJf9JnKJ8cVL9sGYL9Y" },
+    { id: "sevenfloors", status: "soon", name: { ar: "سبعة طوابق", en: "Seven Floors" },
+      line: { ar: "لعبة رعب.", en: "A horror game." }, url: null,
+      image: { ar: "assets/sevenfloors-menu-ar.webp", en: "assets/sevenfloors-menu-en.webp" } }
   ],
-  posts: []
+  posts: [
+    { date: "2026-11-23",
+      title: { ar: "القائمة الرئيسية للعبة سبعة طوابق", en: "Seven Floors: main menu" },
+      text: { ar: "هذه صفحة القائمة الرئيسية للعبة سبعة طوابق، وهي نموذج أولي.", en: "This is the main menu of Seven Floors, an early prototype." },
+      image: { ar: "assets/sevenfloors-menu-ar.webp", en: "assets/sevenfloors-menu-en.webp" },
+      alt: { ar: "القائمة الرئيسية للعبة سبعة طوابق", en: "Seven Floors main menu" } },
+    { date: "2026-11-23",
+      title: { ar: "تعاون مع نادي نزاهة", en: "Working with Nazaha Club" },
+      text: { ar: "تعاونّا مع نادي نزاهة في جامعة الإمام عبدالرحمن بن فيصل.", en: "We teamed up with Nazaha Club at Imam Abdulrahman Bin Faisal University." } }
+  ]
 };
 
 const UI = {
   ar: {
-    title: "قرطاس — استوديو ألعاب عربي",
+    title: "قرطاس — استوديو ألعاب",
     desc: SITE.about.ar,
     skip: "تخطّي إلى المحتوى", home: "قرطاس",
-    nav: { about: "من نحن", games: "الألعاب", contact: "تواصل", news: "الأخبار" },
-    h: { about: "من نحن", games: "معرض الألعاب", contact: "تواصل وحسابات", news: "المدوّنة والأخبار" },
+    nav: { about: "من نحن", news: "الأخبار", games: "الألعاب", contact: "تواصل" },
+    h: { about: "من نحن", games: "معرض الألعاب", contact: "تواصل وحسابات", news: "الأخبار" },
     live: "متاحة", soon: "قريبًا", play: "العب الآن", playAria: "العب ",
     ig: "إنستقرام", igSoon: "حساباتنا قريبًا.", noNews: "لا أخبار بعد.",
-    foot: "قرطاس — استوديو ألعاب عربي", top: "إلى الأعلى",
+    foot: "قرطاس — استوديو ألعاب", top: "إلى الأعلى",
     langBtn: "EN", langAria: "Switch to English", themeAria: { dark: "التبديل إلى النمط الفاتح", light: "التبديل إلى النمط الداكن" }
   },
   en: {
-    title: "Qirtas — Arabic game studio",
+    title: "Qirtas — Game studio",
     desc: SITE.about.en,
     skip: "Skip to content", home: "Qirtas",
-    nav: { about: "About", games: "Games", contact: "Contact", news: "News" },
-    h: { about: "About", games: "Games", contact: "Contact & accounts", news: "Blog & news" },
+    nav: { about: "About", news: "News", games: "Games", contact: "Contact" },
+    h: { about: "About", games: "Games", contact: "Contact & accounts", news: "News" },
     live: "Available", soon: "Coming soon", play: "Play now", playAria: "Play ",
     ig: "Instagram", igSoon: "Our accounts are coming soon.", noNews: "No news yet.",
-    foot: "Qirtas — Arabic game studio", top: "Back to top",
+    foot: "Qirtas — Game studio", top: "Back to top",
     langBtn: "ع", langAria: "التبديل إلى العربية", themeAria: { dark: "Switch to light mode", light: "Switch to dark mode" }
   }
 };
@@ -288,6 +307,42 @@ const UI = {
     var p = document.createElementNS("http://www.w3.org/2000/svg", "path");
     p.setAttribute("d", "M5 12h14M13 6l6 6-6 6"); s.appendChild(p); return s;
   }
+  /* أغلفة بكسل آرت مرسومة بالكود (من موقع قرطاس القديم) */
+  function drawCover(cv, id) {
+    var w = 240, h = 135; cv.width = w; cv.height = h;
+    var c = cv.getContext("2d"); c.imageSmoothingEnabled = false;
+    var r = function (x, y, ww, hh, col) { c.fillStyle = col; c.fillRect(Math.round(x), Math.round(y), Math.round(ww), Math.round(hh)); };
+    var seed = 7; function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+    if (id === "alkhatm") {
+      r(0, 0, w, h, "#2a2019");
+      for (var d = 0; d < 5; d++) { var dx = w * .12 + d * w * .17, dy = h * .2 + (d % 2) * h * .08, a = (d - 2) * .06; c.save(); c.translate(dx + 30, dy + 40); c.rotate(a);
+        r(-30, -40, 60, 80, d === 2 ? "#f4ecdc" : "#e6d9bf"); for (var l = 0; l < 7; l++) r(-22, -30 + l * 9, l === 6 ? 24 : 44, 2, "#b9a988");
+        if (d === 2) { c.strokeStyle = "#a3341f"; c.lineWidth = 3; c.beginPath(); c.arc(8, 22, 14, 0, 7); c.stroke(); r(-4, 19, 24, 5, "#a3341f"); }
+        c.restore(); }
+      r(w * .72, h * .55, 30, 14, "#5a3a24"); r(w * .72 + 10, h * .4, 10, 16, "#6e4b2a"); r(w * .72 + 4, h * .55 + 14, 22, 4, "#a3341f");
+    } else if (id === "akhwiya") {
+      r(0, 0, w, h, "#3b2a1d"); for (var p = 0; p < w; p += 24) r(p, 0, 2, h * .62, "#4a3524");
+      r(0, h * .62, w, h * .38, "#2a1d14"); r(w * .25, h * .5, w * .5, h * .16, "#6b4a30"); r(w * .25, h * .5, w * .5, 3, "#8a6440");
+      var jx = w * .5; r(jx - 14, h * .2, 28, 36, "#1b1410"); r(jx - 16, h * .28, 6, 28, "#c9a76a"); r(jx + 10, h * .28, 6, 28, "#c9a76a");
+      r(jx - 7, h * .16, 14, 14, "#8b5a3a"); r(jx - 10, h * .12, 20, 6, "#f4f4f0"); r(jx - 10, h * .12, 20, 2, "#c0392b");
+      r(jx - 11, h * .18, 3, 16, "#f4f4f0"); r(jx + 8, h * .18, 3, 16, "#f4f4f0");
+      r(w * .62, h * .42, 22, 6, "#5a3a24"); r(w * .62 + 8, h * .42 + 6, 6, 10, "#5a3a24");
+      for (var g = 0; g < 4; g++) { var gx = w * (.08 + g * .26); if (g === 1) gx -= w * .05; if (g === 2) gx += w * .05; r(gx, h * .72, 10, 14, ["#d8ccb2", "#5b7f93", "#d8ccb2", "#7a9a3c"][g]); r(gx + 2, h * .68, 6, 5, "#8b5a3a"); }
+    } else if (id === "arwand") {
+      for (var y2 = 0; y2 < h; y2++) r(0, y2, w, 1, "rgb(" + Math.round(28 + y2 / h * 20) + "," + Math.round(20 + y2 / h * 10) + "," + Math.round(30 + y2 / h * 6) + ")");
+      for (var co = 0; co < 4; co++) { var cx = w * (.1 + co * .27); r(cx, h * .1, 14, h * .75, "#3a2d36"); r(cx - 3, h * .1, 20, 6, "#4a3a44"); }
+      r(w * .38, h * .75, w * .24, h * .25, "#5a1f1f"); r(w * .44, h * .3, w * .12, h * .45, "#6b4a20"); r(w * .42, h * .26, w * .16, 8, "#b8862b"); r(w * .47, h * .4, w * .06, h * .2, "#8a2a2a");
+      [w * .18, w * .82].forEach(function (tx) { var gr = c.createRadialGradient(tx, h * .35, 1, tx, h * .35, 60); gr.addColorStop(0, "rgba(255,170,80,.55)"); gr.addColorStop(1, "rgba(255,170,80,0)"); c.fillStyle = gr; c.fillRect(tx - 60, h * .35 - 60, 120, 120); r(tx - 2, h * .35, 4, 16, "#3a2a1a"); r(tx - 3, h * .31, 6, 6, "#ffb347"); });
+    } else if (id === "port1960") {
+      for (var y3 = 0; y3 < h * .6; y3++) { var kk = y3 / (h * .6); r(0, y3, w, 1, "rgb(" + Math.round(60 + 180 * kk) + "," + Math.round(40 + 110 * kk) + "," + Math.round(80 + 20 * kk) + ")"); }
+      r(0, h * .6, w, h * .4, "#2b2a44"); var sg = c.createRadialGradient(w * .7, h * .6, 2, w * .7, h * .6, 80); sg.addColorStop(0, "rgba(255,200,120,.9)"); sg.addColorStop(1, "rgba(255,200,120,0)"); c.fillStyle = sg; c.fillRect(0, 0, w, h);
+      for (var rr = 0; rr < 26; rr++) r(w * .7 + (rnd() - .5) * (10 + rr * 2), h * .6 + rr * 2, 4, 1, "rgba(255,210,140,.5)");
+      r(0, h * .52, w * .45, h * .08, "#3a2a2a"); for (var hs = 0; hs < 5; hs++) r(hs * w * .09, h * .44 - (hs % 2) * 6, w * .07, h * .08 + (hs % 2) * 6, "#4a3434");
+      for (var pl = 0; pl < 5; pl++) r(w * .05 + pl * w * .1, h * .6, 3, h * .14, "#3a2a1a"); r(0, h * .6, w * .5, 3, "#5a4030");
+      r(w * .3, h * .72, 4, 10, "#1a1420"); r(w * .62, h * .56, w * .2, 6, "#1d1626"); r(w * .71, h * .36, 2, h * .2, "#1d1626");
+    }
+  }
+
   function setMeta(sel, attr, val) { var m = document.querySelector(sel); if (m) m.setAttribute(attr, val); }
 
   function render() {
@@ -306,7 +361,7 @@ const UI = {
     Array.prototype.forEach.call(document.querySelectorAll(".brand img, .hero-logo img"), function (i) { i.alt = t.home; });
     var nav = $("nav"); nav.textContent = "";
     nav.setAttribute("aria-label", lang === "ar" ? "التنقل الرئيسي" : "Main navigation");
-    ["about", "games", "contact", "news"].forEach(function (k) {
+    ["about", "news", "games", "contact"].forEach(function (k) {
       var a = el("a", null, t.nav[k]); a.href = "#" + k; nav.appendChild(a);
     });
     $("h-about").textContent = t.h.about; $("aboutText").textContent = SITE.about[lang];
@@ -317,19 +372,28 @@ const UI = {
     SITE.games.forEach(function (g) {
       var live = g.status === "live" && g.url;
       var li = el("li", "game" + (live ? "" : " soon"));
+      var cov = el("div", "cover");
+      if (g.image) {
+        var im = el("img"); im.src = g.image[lang]; im.alt = g.name[lang]; im.width = 1200; im.height = 675; im.loading = "lazy"; cov.appendChild(im);
+      } else {
+        var cv = el("canvas"); cv.setAttribute("aria-hidden", "true"); cov.appendChild(cv); drawCover(cv, g.id);
+      }
+      li.appendChild(cov);
+      var inner = el("div", "gbody");
       var h = el("h3"); var nm = el("span"); nm.appendChild(nameNode(g.name)); h.appendChild(nm);
-      h.appendChild(el("span", "badge", live ? t.live : t.soon)); li.appendChild(h);
-      if (g.line) li.appendChild(el("p", null, g.line[lang]));
+      h.appendChild(el("span", "badge", live ? t.live : t.soon)); inner.appendChild(h);
+      if (g.line) inner.appendChild(el("p", null, g.line[lang]));
       if (live && g.credit) {
         var c = el("p", "credit"); c.appendChild(document.createTextNode(g.credit[lang] + " "));
-        c.appendChild(ext(el("a", null, g.credit.name[lang]), g.credit.url)); li.appendChild(c);
+        c.appendChild(ext(el("a", null, g.credit.name[lang]), g.credit.url)); inner.appendChild(c);
       }
       if (live) {
         var a = ext(el("a", "play"), g.url);
         a.appendChild(el("span", null, t.play)); a.appendChild(arrow());
         a.setAttribute("aria-label", t.playAria + g.name[lang]);
-        li.appendChild(a);
+        inner.appendChild(a);
       }
+      li.appendChild(inner);
       ul.appendChild(li);
     });
 
@@ -346,10 +410,12 @@ const UI = {
     if (!SITE.posts.length) nb.appendChild(el("p", "empty", t.noNews));
     else {
       var pl = el("ul", "posts");
-      SITE.posts.slice().sort(function (a, b) { return a.date < b.date ? 1 : -1; }).forEach(function (p) {
-        var li = el("li", "post"); li.appendChild(el("h3", null, p.title[lang]));
-        var tm = el("time", null, fmtDate(p.date)); tm.dateTime = p.date; li.appendChild(tm);
-        li.appendChild(el("p", null, p.text[lang])); pl.appendChild(li);
+      SITE.posts.slice().sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : 0; }).forEach(function (p) {
+        var li = el("li", "post");
+        if (p.image) { var pi = el("img", "pimg"); pi.src = p.image[lang]; pi.alt = (p.alt || p.title)[lang]; pi.width = 1200; pi.height = 675; pi.loading = "lazy"; li.appendChild(pi); }
+        var pb = el("div", "pbody"); li.appendChild(pb); pb.appendChild(el("h3", null, p.title[lang]));
+        var tm = el("time", null, fmtDate(p.date)); tm.dateTime = p.date; pb.appendChild(tm);
+        pb.appendChild(el("p", null, p.text[lang])); pl.appendChild(li);
       });
       nb.appendChild(pl);
     }
